@@ -28,7 +28,8 @@ else
                     <td>@pizza.Description</td>
                     <td>@pizza.Price</td>
                     <td>
-                        <a href="@Url.Action("Detail",new {id = pizza.Id})" class="text-capitalize btn btn-primary">show</a>
+                        <a href="@Url.Action("Detail", new {id = pizza.Id})" class="text-capitalize btn btn-primary">show</a>
+                        <a class="text-capitalize btn btn-warning" href="@Url.Action("Update", "Pizza", new { id = pizza.Id })">update</a>
                     </td>
                 </tr>
             }
