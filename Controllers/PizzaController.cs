@@ -87,5 +87,25 @@ namespace la_mia_pizzeria_model.Controllers
 
             return RedirectToAction("Index");
         }
+
+        //DELETE - CANCELLA
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Delete(int id)
+        {
+            Pizza pizza = db.Pizze.Where(pizza => pizza.Id == id).FirstOrDefault();
+
+            if (pizza == null)
+            {
+                return NotFound();
+            }
+
+            db.Pizze.Remove(pizza);
+            db.SaveChanges();
+
+
+            return RedirectToAction("Index");
+        }
     }
 }

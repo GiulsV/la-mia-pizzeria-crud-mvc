@@ -30,6 +30,9 @@ else
                     <td>
                         <a href="@Url.Action("Detail", new {id = pizza.Id})" class="text-capitalize btn btn-primary">show</a>
                         <a class="text-capitalize btn btn-warning" href="@Url.Action("Update", "Pizza", new { id = pizza.Id })">update</a>
+                        <form asp-controller="Pizza" asp-action="Delete" asp-route-id="@pizza.Id" method="post">
+                            <button type="submit" class="btn btn-danger text-capitalize">elimina</button>
+                        </form>
                     </td>
                 </tr>
             }
