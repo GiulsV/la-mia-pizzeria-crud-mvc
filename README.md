@@ -1,4 +1,16 @@
-#la-mia-pizzeria-post
+# la-mia-pizzeria-crud-mvc
+
+22/11/22
+Completiamo le pagine di gestione delle nostre pizze!
+
+Abbiamo la pagina con la lista di tutte le pizze, quella con i dettagli della singola pizza, quella per crearla...cosa manca?
+
+Dobbiamo realizzare :
+	- pagina di modifica di una pizza
+	- cancellazione di una pizza cliccando un pulsante presente nella grafica di ogni singolo prodotto mostrato nella lista in homepage
+
+
+# la-mia-pizzeria-post
 
 22/11/22
 Abbiamo la lista delle pizze, abbiamo i dettagli delle pizze...perchè non creare la pagina per la creazione di una nuova pizza?
