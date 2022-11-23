@@ -15,6 +15,7 @@ else
                 <th scope="col">nome</th>
                 <th scope="col">desccrizione</th>
                 <th scope="col">prezzo</th>
+                <th>categoria</th>
                 <th scope="col">azioni</th>
             </tr>
         </thead>
@@ -27,6 +28,7 @@ else
                     <th>@pizza.Name</th>
                     <td>@pizza.Description</td>
                     <td>@pizza.Price</td>
+                    <td>@pizza.Category.Name</td>
                     <td>
                         <div class="d-grid gap-2">
                             <a href="@Url.Action("Detail", new {id = pizza.Id})" >

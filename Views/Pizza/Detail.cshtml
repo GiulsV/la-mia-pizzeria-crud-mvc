@@ -1,10 +1,26 @@
 ﻿@model Pizza
 
-<div class="card" style="width: 18rem;">
-    <img src="@Model.Image" class="card-img-top" alt="@Model.Name">
-    <div class="card-body">
-        <h2>Nome: @Model.Name</h2>
-        <span>Prezzo: @Model.Price €</span>
-        <p class="card-text">Descrizione: @Model.Description</p>
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div class="d-flex align-items-center">
+                <h1 class="mt-3 mb-3">Dettagli pizza</h1>
+            </div>
+            <div class="post-single-image-container">
+                <img src="@Model.Image">
+            </div>
+            <p>
+                <strong>Nome:</strong>
+                @Model.Name
+            </p>
+            <p>
+                <strong>Contenuto:</strong>
+                @Model.Description
+            </p>
+            <p>
+                <strong>Categoria:</strong>
+                @Model.Category.Name
+            </p>
+        </div>
     </div>
 </div>
