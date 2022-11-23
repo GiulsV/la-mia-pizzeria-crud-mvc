@@ -21,6 +21,14 @@ namespace la_mia_pizzeria_model.Models
 
         public double Price { get; set; }
 
+
+        //relazione 1 a n con Category ed è la vera e propria chiave esterna
+        public int CategoryId { get; set; }
+
+        //relazione 1 a n con Category l'istanza del record nelle query
+        public Category? Category { get; set; }
+
+
         //costruttore vuoto
         public Pizza(){
 

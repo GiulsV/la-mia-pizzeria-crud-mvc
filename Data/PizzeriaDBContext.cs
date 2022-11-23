@@ -6,7 +6,7 @@ namespace la_mia_pizzeria_model.Data
     public class PizzeriaDbContext : DbContext
     {
         public DbSet<Pizza> Pizze { get; set; }
-
+        public DbSet<Category> Categories { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
