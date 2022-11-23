@@ -6,9 +6,15 @@
 }
 else
 {
-    <table class="table">
-        <thead>
-            <tr>
+    <table class="table table-hover table-sm caption-top">
+        <caption class="display-5 text-dark">Lista Categorie</caption>
+        <caption>
+            <a class="text-uppercase"  asp-area="" asp-controller="Category" asp-action="Create">
+                <button class="text-uppercase btn btn-success " type="submit">crea categoria</button>
+            </a>
+        </caption>
+        <thead class="table-light">
+            <tr class="text-uppercase">
                 <th scope="col">id</th>
                 <th scope="col">nome</th>
                 <th scope="col">azione</th>
@@ -21,15 +27,17 @@ else
                     <th scope="row">@categoria.Id</th>
                     <th>@categoria.Name</th>
                     <td>
-                        <a href="@Url.Action("Details","Category", new {id = categoria.Id})">
-                            <button type="button" class="btn btn-primary btn-sm mb-3">mostra</button>
-                        </a>
-                        <a href="@Url.Action("Update","Category", new {id = categoria.Id})">
-                            <button type="button" class="btn btn-warning btn-sm mb-3">modifica</button>
-                        </a>
-                        <form asp-controller="Category" asp-action="Delete" asp-route-id="@categoria.Id" method="post">
-                            <button type="submit" class="btn btn-danger btn-sm">elimina</button>
-                        </form>
+                        <div class="d-grid gap-2">
+                            <a href="@Url.Action("Details","Category", new {id = categoria.Id})">
+                                <button class="text-capitalize btn btn-primary " type="submit">dettagli</button>
+                            </a>
+                            <a href="@Url.Action("Update","Category", new {id = categoria.Id})">
+                                <button class="text-capitalize btn btn-warning " type="submit">modifica</button>
+                            </a>
+                            <form asp-controller="Category" asp-action="Delete" asp-route-id="@categoria.Id" method="post">
+                                <button type="submit" class="btn btn-danger text-capitalize ">elimina</button>
+                            </form>
+                        </div>
                     </td>
                 </tr>
             }

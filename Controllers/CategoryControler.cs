@@ -87,14 +87,14 @@ namespace la_mia_pizzeria_model.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Delete(int id)
         {
-            Category post = db.Categories.Where(c => c.Id == id).FirstOrDefault();
+            Category categoria = db.Categories.Where(c => c.Id == id).FirstOrDefault();
 
-            if (post == null)
+            if (categoria == null)
             {
                 return NotFound();
             }
 
-            db.Categories.Remove(post);
+            db.Categories.Remove(categoria);
             db.SaveChanges();
 
 
