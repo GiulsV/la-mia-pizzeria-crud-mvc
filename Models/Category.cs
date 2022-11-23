@@ -11,5 +11,15 @@ namespace la_mia_pizzeria_model.Models
         [StringLength(30, ErrorMessage = "Non può avere più di 30 caratteri")]
         public string Name { get; set; }
         public List<Pizza>? Pizze { get; set; }
+
+        public Category()
+        {
+        }
+
+        public Category(int id, string name, List<Pizza>? pizze)
+        {
+            Id = id;
+            Name = name;
+        }
     }
 }

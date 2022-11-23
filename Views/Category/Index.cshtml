@@ -2,13 +2,14 @@
 
 @if (Model.Count() == 0)
 {
-    <h2>Purtoppo non hai nessuna categoria inserita!!!</h2>
+    <h2>nessuna categoria inserita</h2>
 }
 else
 {
     <table class="table">
         <thead>
             <tr>
+                <th scope="col">id</th>
                 <th scope="col">nome</th>
                 <th scope="col">azione</th>
             </tr>
@@ -17,7 +18,8 @@ else
             @foreach (Category categoria in Model)
             {
                 <tr>
-                    <th scope="row">@categoria.Name</th>
+                    <th scope="row">@categoria.Id</th>
+                    <th>@categoria.Name</th>
                     <td>
                         <a href="@Url.Action("Details","Category", new {id = categoria.Id})">
                             <button type="button" class="btn btn-primary btn-sm mb-3">mostra</button>

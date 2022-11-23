@@ -1,6 +1,7 @@
 ﻿using la_mia_pizzeria_model.Data;
 using la_mia_pizzeria_model.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace la_mia_pizzeria_model.Controllers
 {
@@ -18,6 +19,18 @@ namespace la_mia_pizzeria_model.Controllers
         {
             List<Category> listCategories = db.Categories.ToList();
             return View(listCategories);
+        }
+
+        //DETAILS
+        public IActionResult Details(int id)
+        {
+            Category categoria = db.Categories.Where(c => c.Id == id).FirstOrDefault();
+
+            if (categoria == null)
+                return NotFound();
+
+            return View(categoria);
+
         }
 
         //CREATE
@@ -70,6 +83,22 @@ namespace la_mia_pizzeria_model.Controllers
         }
 
         //DELETE
-        //public IActionResult Delete(int id) { }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Delete(int id)
+        {
+            Category post = db.Categories.Where(c => c.Id == id).FirstOrDefault();
+
+            if (post == null)
+            {
+                return NotFound();
+            }
+
+            db.Categories.Remove(post);
+            db.SaveChanges();
+
+
+            return RedirectToAction("Index");
+        }
     }
 }
