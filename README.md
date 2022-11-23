@@ -1,5 +1,22 @@
 # la-mia-pizzeria-crud-mvc
 
+21/11/22
+
+Oggi sviluppiamo un’importante funzionalità : aggiungiamo una categoria alle nostre pizze (“Pizze classiche”, “Pizze bianche”, “Pizze vegetariane”, “Pizze di mare”, ...).
+
+Dobbiamo quindi predisporre tutto il codice necessario per poter collegare una categoria a una pizza (in una relazione 1 a molti, cioè una pizza può avere una sola categoria, e una categoria può essere collegata a più pizze).
+
+Tramite migration dobbiamo creare la tabella per le categorie. Popoliamola a mano con i valori elencati precedentemente.
+
+Aggiungiamo poi l’informazione della categoria nelle varie pagine :
+	- nei dettagli di una singola pizza (nell’admin) mostrare la sua categoria
+	- quando si crea/modifica una pizza si deve poter selezionare anche la sua categoria
+
+Bonus:
+
+Realizzare le operazioni di CRUD anche per la nuova entità Categoria.
+(attenzione per la parte di delete non abbiamo visto nel dettaglio le problematiche che potrebbero emergere data la relazione esterna)
+
 22/11/22
 Completiamo le pagine di gestione delle nostre pizze!
 
