@@ -36,7 +36,7 @@ else
                     <td>@pizza.Category.Name</td>
                     <td>
                         <div class="d-grid gap-2">
-                            <a href="@Url.Action("Detail", new {id = pizza.Id})" >
+                            <a href="@Url.Action("Detail","Pizza", new {id = pizza.Id})" >
                                 <button class="text-capitalize btn btn-primary " type="submit">dettagli</button>
                             </a>
                             <a href="@Url.Action("Update", "Pizza", new { id = pizza.Id })">
