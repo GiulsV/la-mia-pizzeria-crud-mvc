@@ -91,7 +91,7 @@ namespace la_mia_pizzeria_model.Controllers
         public IActionResult Update(int id)
         {
             PizzaForm formData = new PizzaForm();
-            Pizza pizza = db.Pizze.Where(p => p.Id == id).Include(p => p.Ingredients).FirstOrDefault();
+            Pizza pizza = db.Pizze.Where(p => p.Id == id).Include("Ingredients").FirstOrDefault();
 
             if (pizza == null)
                 return NotFound();
@@ -102,10 +102,14 @@ namespace la_mia_pizzeria_model.Controllers
 
             List<Ingredient> ingredientList = db.Ingredients.ToList();
 
+
             foreach (Ingredient ingredient in ingredientList)
             {
-                SelectListItem listitem = new SelectListItem(ingredient.Name, ingredient.Id.ToString(), formData.Pizza.Ingredients.Any(i => i.Id == ingredient.Id));
-                formData.Ingredients.Add(listitem);
+                formData.Ingredients.Add(new SelectListItem(
+                    ingredient.Name,
+                    ingredient.Id.ToString(),
+                    pizza.Ingredients.Any(i => i.Id == ingredient.Id)
+                    ));
             }
             return View(formData);
         }
@@ -122,21 +126,22 @@ namespace la_mia_pizzeria_model.Controllers
 
                 List<Ingredient> ingredientList = db.Ingredients.ToList();
 
+
                 foreach (Ingredient ingredient in ingredientList)
                 {
-                    SelectListItem listItem = new SelectListItem(ingredient.Name, ingredient.Id.ToString());
-                    formData.Ingredients.Add(listItem);
+                    formData.Ingredients.Add(new SelectListItem(ingredient.Name, ingredient.Id.ToString()));
                 }
 
                 return View(formData);
             }
 
-            Pizza pizzaItem =db.Pizze.Where(pizza => pizza.Id == id).Include(p => p.Ingredients).FirstOrDefault();
+            Pizza pizzaItem =db.Pizze.Where(pizza => pizza.Id == id).Include("Ingredients").FirstOrDefault();
 
             if (pizzaItem != null) 
             {
                 return NotFound();
             }
+
             pizzaItem.Name = formData.Pizza.Name; 
             pizzaItem.Description= formData.Pizza.Description;
             pizzaItem.Image = formData.Pizza.Image;
@@ -159,6 +164,7 @@ namespace la_mia_pizzeria_model.Controllers
 
             return RedirectToAction("Detail", new { id = pizzaItem.Id });
         }
+
         //DELETE - CANCELLA
 
         [HttpPost]
