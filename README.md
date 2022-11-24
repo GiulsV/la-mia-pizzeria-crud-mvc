@@ -1,6 +1,19 @@
 # la-mia-pizzeria-crud-mvc
 
-21/11/22
+24/11/22
+
+Oggi sviluppiamo un’altra importante funzionalità : aggiungiamo gli ingredienti alle nostre pizze.
+
+Una pizza può avere più ingredienti, e un ingrediente può essere presente in più pizze.
+
+Creiamo quindi il Model necessario e la migration.
+
+Aggiungiamo poi il codice al controller (e alle view) per la gestione degli ingredienti quando creiamo, modifichiamo o visualizziamo una pizza.
+
+Bonus: 
+rendete disponibili le CRUD per il backoffice anche per la tabella degli ingredienti, con tutte le accortezze che abbiamo visto per il bonus di ieri.
+
+23/11/22
 
 Oggi sviluppiamo un’importante funzionalità : aggiungiamo una categoria alle nostre pizze (“Pizze classiche”, “Pizze bianche”, “Pizze vegetariane”, “Pizze di mare”, ...).
 
