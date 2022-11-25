@@ -1,5 +1,6 @@
 ﻿using la_mia_pizzeria_model.Data;
 using la_mia_pizzeria_model.Models;
+using la_mia_pizzeria_model.Models.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -7,48 +8,48 @@ namespace la_mia_pizzeria_model.Controllers
 {
     public class IngredientController : Controller
     {
-        PizzeriaDbContext db;
+        DbIngredientRepository ingredientRepository;
 
         public IngredientController() : base()
         {
-            db = new PizzeriaDbContext();
+            ingredientRepository = new DbIngredientRepository();
         }
 
+        //INDEX
         public IActionResult Index()
         {
-            List<Ingredient> listIngredient = db.Ingredients.Include("Pizze").ToList();
+            List<Ingredient> listIngredient = ingredientRepository.All();
             return View(listIngredient);
         }
 
+
+        //CREATE
         public IActionResult Create()
         {
-            return View();
+            Ingredient ingredient = new Ingredient();
+            return View(ingredient);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Create(Ingredient ingrediente)
         {
-            if (db.Ingredients.Where(i => i.Name == ingrediente.Name).Count() > 0)
-            {
-                return View("Errore", "L'ingrediente esiste già");
-
-            }
-
             if (!ModelState.IsValid)
             {
+                return View(ingrediente);
 
-                return View();
             }
-            db.Ingredients.Add(ingrediente);
-            db.SaveChanges();
+
+            ingredientRepository.Create(ingrediente);
 
             return RedirectToAction("Index");
         }
 
+
+        //UPDATE
         public IActionResult Update(int id)
         {
-            Ingredient ingrediente = db.Ingredients.Where(i => i.Id == id).FirstOrDefault();
+            Ingredient ingrediente = ingredientRepository.GetById(id);
 
             if (ingrediente == null)
                 return NotFound();
@@ -66,26 +67,26 @@ namespace la_mia_pizzeria_model.Controllers
             {
                 return View(ingrediente);
             }
-
-            db.Ingredients.Update(ingrediente);
-            db.SaveChanges();
+            ingredientRepository.Update(ingrediente);
 
             return RedirectToAction("Index");
         }
 
+
+        //DELETE
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Delete(int id)
         {
-            Ingredient ingredient = db.Ingredients.Where(i => i.Id == id).Include("Pizze").FirstOrDefault();
+            Ingredient ingrediente = ingredientRepository.GetById(id);
 
-            if (ingredient == null)
+            if (ingrediente == null)
             {
                 return NotFound();
             }
 
-            db.Ingredients.Remove(ingredient);
-            db.SaveChanges();
+            ingredientRepository.Delete(ingrediente);
+
             return RedirectToAction("Index");
         }
     }

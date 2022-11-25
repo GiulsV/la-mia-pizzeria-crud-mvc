@@ -10,14 +10,15 @@ namespace la_mia_pizzeria_model.Controllers
 {
     public class PizzaController : Controller
     {
-        PizzeriaDbContext db;
+        DbPizzaRepository pizzaRepository;
+        DbCategoryRepository categoryRepository;
+        DbIngredientRepository ingredientRepository;
 
-        IDbPizzaRepository pizzaRepository;
-
-        public PizzaController(IDbPizzaRepository _pizzaRepository) : base()
+        public PizzaController() : base()
         {
-            // db = new PizzeriaDbContext();
-            pizzaRepository = _pizzaRepository;
+            pizzaRepository = new DbPizzaRepository();
+            categoryRepository = new DbCategoryRepository();
+            ingredientRepository = new DbIngredientRepository();
         }
 
         //INDEX
@@ -44,15 +45,15 @@ namespace la_mia_pizzeria_model.Controllers
             PizzaForm formData = new PizzaForm();
 
             formData.Pizza = new Pizza();
-            formData.Categories = db.Categories.ToList();
+            formData.Categories = categoryRepository.All();
             formData.Ingredients =new List<SelectListItem>();
 
-            List<Ingredient> ingredientList = db.Ingredients.ToList();
+            //List<Ingredient> ingredientList = db.Ingredients.ToList();
 
-            foreach (Ingredient ingredient in ingredientList)
-            {
-                formData.Ingredients.Add(new SelectListItem(ingredient.Name, ingredient.Id.ToString()));
-            }
+            //foreach (Ingredient ingredient in ingredientList)
+            //{
+            //    formData.Ingredients.Add(new SelectListItem(ingredient.Name, ingredient.Id.ToString()));
+            //}
             return View(formData);
         }
 
@@ -62,10 +63,10 @@ namespace la_mia_pizzeria_model.Controllers
         {
             if (!ModelState.IsValid)
             {
-                formData.Categories = db.Categories.ToList();
+                formData.Categories = categoryRepository.All();
                 formData.Ingredients = new List<SelectListItem>();
 
-                List<Ingredient> ingredientList = db.Ingredients.ToList();
+                List<Ingredient> ingredientList = ingredientRepository.All();
 
                 foreach (Ingredient ingredient in ingredientList)
                 {
@@ -91,11 +92,11 @@ namespace la_mia_pizzeria_model.Controllers
 
             PizzaForm formData = new PizzaForm();
 
-            formData.Pizza = pizza;
-            formData.Categories = db.Categories.ToList();
+            formData.Pizza = pizzaRepository.GetById(id);
+            formData.Categories = categoryRepository.All();
             formData.Ingredients = new List<SelectListItem>();
 
-            List<Ingredient> ingredientList = db.Ingredients.ToList();
+            List<Ingredient> ingredientList = ingredientRepository.All();
 
 
             foreach (Ingredient ingredient in ingredientList)
@@ -116,10 +117,10 @@ namespace la_mia_pizzeria_model.Controllers
             if (!ModelState.IsValid)
             {
                 formData.Pizza.Id = id;
-                formData.Categories = db.Categories.ToList();
+                formData.Categories = categoryRepository.All();
                 formData.Ingredients = new List<SelectListItem>();
 
-                List<Ingredient> ingredientList = db.Ingredients.ToList();
+                List<Ingredient> ingredientList = ingredientRepository.All();
 
 
                 foreach (Ingredient ingredient in ingredientList)
@@ -159,7 +160,7 @@ namespace la_mia_pizzeria_model.Controllers
 
             //db.SaveChanges();
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Detail", new { id = pizzaItem.Id });
         }
 
         //DELETE - CANCELLA

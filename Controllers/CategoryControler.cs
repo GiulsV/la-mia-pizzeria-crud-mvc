@@ -1,5 +1,6 @@
 ﻿using la_mia_pizzeria_model.Data;
 using la_mia_pizzeria_model.Models;
+using la_mia_pizzeria_model.Models.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -7,24 +8,24 @@ namespace la_mia_pizzeria_model.Controllers
 {
     public class CategoryController : Controller
     {
-        PizzeriaDbContext db;
+        DbCategoryRepository categoryRepository;
 
         public CategoryController() : base()
         {
-            db = new PizzeriaDbContext();
+            categoryRepository = new DbCategoryRepository();
         }
 
         //INDEX
         public IActionResult Index()
         {
-            List<Category> listCategories = db.Categories.ToList();
-            return View(listCategories);
+            List<Category> categories = categoryRepository.All();
+            return View(categories);
         }
 
         //DETAILS
         public IActionResult Details(int id)
         {
-            Category categoria = db.Categories.Where(c => c.Id == id).FirstOrDefault();
+            Category categoria = categoryRepository.GetById(id);
 
             if (categoria == null)
                 return NotFound();
@@ -36,7 +37,8 @@ namespace la_mia_pizzeria_model.Controllers
         //CREATE
         public IActionResult Create()
         {
-            return View();
+            Category category = new Category();
+            return View(category);
         }
 
         [HttpPost]
@@ -48,8 +50,7 @@ namespace la_mia_pizzeria_model.Controllers
 
                 return View();
             }
-            db.Categories.Add(categoria);
-            db.SaveChanges();
+            categoryRepository.Create(categoria);
 
             return RedirectToAction("Index");
         }
@@ -57,12 +58,10 @@ namespace la_mia_pizzeria_model.Controllers
         //UPDATE
         public IActionResult Update(int id)
         {
-            Category categoria = db.Categories.Where(c => c.Id == id).FirstOrDefault();
-
-            if (categoria == null)
-                return NotFound();
-
-            return View(categoria);
+            Category category = categoryRepository.GetById(id);
+            if (category == null)
+                return View("NotFound", "La categoria cercata non è stata trovata");
+            return View(category);
         }
 
         [HttpPost]
@@ -75,9 +74,7 @@ namespace la_mia_pizzeria_model.Controllers
             {
                 return View(categoria);
             }
-
-            db.Categories.Update(categoria);
-            db.SaveChanges();
+            categoryRepository.Update(categoria);
 
             return RedirectToAction("Index");
         }
@@ -87,16 +84,13 @@ namespace la_mia_pizzeria_model.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Delete(int id)
         {
-            Category categoria = db.Categories.Where(c => c.Id == id).FirstOrDefault();
+            Category categoria = categoryRepository.GetById(id);
 
             if (categoria == null)
             {
                 return NotFound();
             }
-
-            db.Categories.Remove(categoria);
-            db.SaveChanges();
-
+            categoryRepository.Delete(categoria);
 
             return RedirectToAction("Index");
         }

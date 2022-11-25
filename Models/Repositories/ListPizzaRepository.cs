@@ -9,8 +9,7 @@ namespace la_mia_pizzeria_model.Models.Repositories
 
         public ListPizzaRepository()
         {
-            //non lo possiamo fare perchè ognu nuova possibile istanza ci cancella la lista
-            //Posts = new List<Post>();
+
         }
 
         public List<Pizza> All()
