@@ -18,6 +18,7 @@ namespace la_mia_pizzeria_model.Models.Repositories
             return Pizza;
         }
 
+        //CREATE
         public void Create(Pizza pizza, List<int> selectedIngredients)
         {
             //simuliamo la primary key
@@ -27,35 +28,37 @@ namespace la_mia_pizzeria_model.Models.Repositories
             //simulazione da implentare con ListTagRepository
             pizza.Ingredients = new List<Ingredient>();
 
-            TagToPost(pizza, selectedIngredients);
+            IngredientToPizza(pizza, selectedIngredients);
             //fine simulazione
 
             Pizza.Add(pizza);
         }
 
-        private static void TagToPost(Pizza post, List<int> selectedIngredients)
+        private static void IngredientToPizza(Pizza pizza, List<int> selectedIngredients)
         {
-            post.Category = new Category() { Id = 1, Name = "Fake cateogry" };
+            pizza.Category = new Category() { Id = 1, Name = "Fake cateogry" };
 
             foreach (int ingId in selectedIngredients)
             {
-                post.Ingredients.Add(new Ingredient() { Id = ingId, Name = "Fake tag " + ingId });
+                pizza.Ingredients.Add(new Ingredient() { Id = ingId, Name = "Fake tag " + ingId });
             }
         }
 
-        public void Delete(Pizza post)
+        //DELETE
+        public void Delete(Pizza pizza)
         {
-            Pizza.Remove(post);
+            Pizza.Remove(pizza);
         }
 
         public Pizza GetById(int id)
         {
-            Pizza pizza = Pizza.Where(post => post.Id == id).FirstOrDefault();
+            Pizza pizza = Pizza.Where(pizza => pizza.Id == id).FirstOrDefault();
 
             pizza.Category = new Category() { Id = 1, Name = "Fake cateogry" };
             return pizza;
         }
 
+        //UPDATE
         public void Update(Pizza pizza, Pizza formData, List<int>? selectedIngredients)
         {
             pizza = formData;
@@ -65,7 +68,7 @@ namespace la_mia_pizzeria_model.Models.Repositories
 
             //simulazione da implentare con ListTagRepository
 
-            TagToPost(pizza, selectedIngredients);
+            IngredientToPizza(pizza, selectedIngredients);
             //fine simulazione
 
 

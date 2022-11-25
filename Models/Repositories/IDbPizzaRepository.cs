@@ -1,4 +1,5 @@
-﻿namespace la_mia_pizzeria_model.Models.Repositories
+﻿
+namespace la_mia_pizzeria_model.Models.Repositories
 {
     public interface IDbPizzaRepository
     {

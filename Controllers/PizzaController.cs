@@ -1,9 +1,6 @@
 ﻿using la_mia_pizzeria_model.Models;
 using la_mia_pizzeria_model.Data;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.Tokens;
-using Microsoft.Extensions.Hosting;
-using Microsoft.EntityFrameworkCore;
 using la_mia_pizzeria_model.Models.Form;
 using Microsoft.CodeAnalysis;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -14,6 +11,7 @@ namespace la_mia_pizzeria_model.Controllers
     public class PizzaController : Controller
     {
         PizzeriaDbContext db;
+
         IDbPizzaRepository pizzaRepository;
 
         public PizzaController(IDbPizzaRepository _pizzaRepository) : base()
@@ -161,7 +159,7 @@ namespace la_mia_pizzeria_model.Controllers
 
             //db.SaveChanges();
 
-            return RedirectToAction("Detail", new { id = pizzaItem.Id });
+            return RedirectToAction("Index");
         }
 
         //DELETE - CANCELLA
