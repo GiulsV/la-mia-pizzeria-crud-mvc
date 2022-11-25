@@ -1,6 +1,6 @@
 ﻿namespace la_mia_pizzeria_model.Models.Repositories
 {
-    public interface IDbCategoryRepository
+    public interface ICategoryRepository
     {
         List<Category> All();
         Category GetById(int id);

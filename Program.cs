@@ -8,7 +8,8 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages()
     .AddRazorRuntimeCompilation();
 
-builder.Services.AddScoped<IDbPizzaRepository, DbPizzaRepository>();
+//builder.Services.AddScoped<IDbPizzaRepository, DbPizzaRepository>();
+builder.Services.AddScoped<IPizzaRepository, InMemoryPizzaRepository>();
 
 var app = builder.Build();
 

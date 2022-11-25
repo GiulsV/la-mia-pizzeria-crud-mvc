@@ -6,7 +6,7 @@ using Microsoft.Extensions.Hosting;
 
 namespace la_mia_pizzeria_model.Models.Repositories
 {
-    public class DbPizzaRepository : IDbPizzaRepository
+    public class DbPizzaRepository : IPizzaRepository
     {
         private PizzeriaDbContext db;
 

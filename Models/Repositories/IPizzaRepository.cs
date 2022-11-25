@@ -1,7 +1,7 @@
 ﻿
 namespace la_mia_pizzeria_model.Models.Repositories
 {
-    public interface IDbPizzaRepository
+    public interface IPizzaRepository
     {
         List<Pizza> All();
         void Create(Pizza pizza, List<int> selectedPizze);

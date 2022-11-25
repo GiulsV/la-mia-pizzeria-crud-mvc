@@ -1,6 +1,6 @@
 ﻿namespace la_mia_pizzeria_model.Models.Repositories
 {
-    public interface IDbIngredientRepository
+    public interface IIngredientRepository
     {
         List<Ingredient> All();
         Ingredient GetById(int id);
