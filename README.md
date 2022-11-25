@@ -1,5 +1,18 @@
 # la-mia-pizzeria-crud-mvc
 
+25/11/22
+
+Il nostro team leader ci ha chiesto di creare un’altra implementazione per gestire le nostre pizze : vogliamo poter scegliere di salvarle in memoria invece di memorizzarle nel db. 
+E tramite poche righe di codice deve essere possibile in qualsiasi momento passare dalla gestione su database, a quella su liste in memoria.
+
+Spostiamo quindi tutto il codice che utilizza entity framework in una classe che chiameremo DbPizzaRepository. 
+E facciamo in modo che i controller utilizzino quel repository.
+
+Creiamo poi un secondo repository chiamato InMemoryPizzaRepository : in questo caso le pizze saranno salvate in memoria. 
+A questo punto facciamo in modo che entrambi i repository implementino un’interfaccia in comune.
+
+Inserite la dependency injection per passare le istanze del repository al sistema
+
 24/11/22
 
 Oggi sviluppiamo un’altra importante funzionalità : aggiungiamo gli ingredienti alle nostre pizze.
